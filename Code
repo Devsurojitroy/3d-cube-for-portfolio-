@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Cube Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="cube">
+            <div class="face front">
+                <div class="content">
+                    <h2>Project 1</h2>
+                    <img src="project1.png" alt="Project 1">
+                    <p>Short description of Project 1.</p>
+                </div>
+            </div>
+            <div class="face back">
+                <div class="content">
+                    <h2>Project 2</h2>
+                    <img src="project2.png" alt="Project 2">
+                    <p>Short description of Project 2.</p>
+                </div>
+            </div>
+            <div class="face right">
+                <div class="content">
+                    <h2>Project 3</h2>
+                    <img src="project3.png" alt="Project 3">
+                    <p>Short description of Project 3.</p>
+                </div>
+            </div>
+            <div class="face left">
+                <div class="content">
+                    <h2>Project 4</h2>
+                    <img src="project4.png" alt="Project 4">
+                    <p>Short description of Project 4.</p>
+                </div>
+            </div>
+            <div class="face top">
+                <div class="content">
+                    <h2>About Me</h2>
+                    <p>A brief about me and my work.</p>
+                </div>
+            </div>
+            <div class="face bottom">
+                <div class="content">
+                    <h2>Contact</h2>
+                    <p>Contact details and social links.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+css
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #111;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    perspective: 1500px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.cube {
+    position: relative;
+    width: 300px;
+    transform-style: preserve-3d;
+    transform: rotateX(-20deg) rotateY(20deg);
+    transition: transform 1s;
+    animation: rotate 20s infinite linear;
+}
+
+.face {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    transition: transform 1s, background-color 0.5s ease;
+}
+
+.face .content {
+    text-align: center;
+}
+
+.face img {
+    max-width: 80%;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.front { transform: translateZ(150px); }
+.back { transform: rotateY(180deg) translateZ(150px); }
+.right { transform: rotateY(90deg) translateZ(150px); }
+.left { transform: rotateY(-90deg) translateZ(150px); }
+.top { transform: rotateX(90deg) translateZ(150px); }
+.bottom { transform: rotateX(-90deg) translateZ(150px); }
+
+@keyframes rotate {
+    from { transform: rotateX(-20deg) rotateY(20deg); }
+    to { transform: rotateX(-20deg) rotateY(380deg); }
+}
+
+.cube:hover {
+    animation-play-state: paused;
+    transform: rotateX(0deg) rotateY(0deg);
+}
+
+
+JavaScript 
+
+
+const cube = document.querySelector('.cube');
+let currentX = -20;
+let currentY = 20;
+
+cube.addEventListener('click', (e) => {
+    currentX = (currentX + 90) % 360;
+    cube.style.transform = `rotateX(${currentX}deg) rotateY(${currentY}deg)`;
+});
+
+cube.addEventListener('mouseover', () => {
+    cube.style.animationPlayState = 'paused';
+});
+
+cube.addEventListener('mouseout', () => {
+    cube.style.animationPlayState = 'running';
+});
+
